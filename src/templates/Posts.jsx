@@ -5,7 +5,7 @@ import { restBase } from "../utilities/Utilities";
 import FeaturedImage from "../utilities/FeaturedImage";
 
 const Posts = () => {
-  const restPath = restBase + "";
+  const restPath = `${restBase}posts?_embed`;
   const [restData, setData] = useState([]);
   const [isLoaded, setLoadStatus] = useState(false);
 
@@ -36,9 +36,17 @@ const Posts = () => {
                   featuredImageObject={post._embedded["wp:featuredmedia"][0]}
                 />
               )}
+
               <Link to={`/blog/${post.slug}`}>
                 <h2>{post.title.rendered}</h2>
               </Link>
+
+              {post._embedded && post._embedded.author && (
+                <p className="author-name">
+                  By: {post._embedded.author[0].name}
+                </p>
+              )}
+
               <div
                 className="entry-content"
                 dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}

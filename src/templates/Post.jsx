@@ -6,7 +6,7 @@ import FeaturedImage from "../utilities/FeaturedImage";
 
 const Post = () => {
   const { slug } = useParams();
-  const restPath = restBase + ``;
+  const restPath = `${restBase}posts?slug=${slug}&_embed`;
   const [restData, setData] = useState([]);
   const [isLoaded, setLoadStatus] = useState(false);
 
@@ -30,12 +30,20 @@ const Post = () => {
         <>
           <title>{`${restData.title.rendered} | Mindset Headless`}</title>
           <article id={`post-${restData.id}`}>
+            {restData.featured_media !== 0 && restData._embedded && (
+              <FeaturedImage
+                featuredImageObject={restData._embedded["wp:featuredmedia"][0]}
+              />
+            )}
+
             <h1>{restData.title.rendered}</h1>
+
             <div
               className="entry-content"
               dangerouslySetInnerHTML={{ __html: restData.content.rendered }}
             ></div>
           </article>
+
           <nav className="posts-navigation">
             {restData?.previous_post?.slug && (
               <Link

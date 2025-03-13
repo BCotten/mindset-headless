@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Loading from "../utilities/Loading";
 import { restBase } from "../utilities/Utilities";
 
-const Home = () => {
-  const restPath = restBase + "pages?slug=home&_embed";
+const Contact = () => {
+  const restPath = restBase + "pages?slug=contact&_embed";
   const [restData, setData] = useState([]);
   const [isLoaded, setLoadStatus] = useState(false);
 
@@ -41,4 +41,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Contact;

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Loading from "../utilities/Loading";
 import { restBase } from "../utilities/Utilities";
 
-const Page = () => {
-  const restPath = restBase;
+const Page = ({ pageID }) => {
+  const restPath = `${restBase}pages/${pageID}`;
   const [restData, setData] = useState([]);
   const [isLoaded, setLoadStatus] = useState(false);
 
